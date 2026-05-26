@@ -1,5 +1,9 @@
 import type { ReactNode } from "react";
 import { whatIsTheInternet } from "./articles/what-is-the-internet";
+import { whatIsAWebsite } from "./articles/what-is-a-website";
+import { whatIsADomainName } from "./articles/what-is-a-domain-name";
+import { whatIsWebHosting } from "./articles/what-is-web-hosting";
+import { whatIsDns } from "./articles/what-is-dns";
 
 export type Category = "Tech Basics" | "AI Tools" | "Productivity" | "Future Tech";
 
@@ -30,7 +34,13 @@ export interface Article {
   content: () => ReactNode;
 }
 
-export const articles: Article[] = [whatIsTheInternet];
+export const articles: Article[] = [
+  whatIsTheInternet,
+  whatIsAWebsite,
+  whatIsADomainName,
+  whatIsWebHosting,
+  whatIsDns,
+];
 
 export function getArticle(slug: string): Article | undefined {
   return articles.find((a) => a.slug === slug);
