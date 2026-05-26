@@ -34,7 +34,13 @@ export interface Article {
   content: () => ReactNode;
 }
 
-export const articles: Article[] = [whatIsTheInternet];
+export const articles: Article[] = [
+  whatIsTheInternet,
+  whatIsAWebsite,
+  whatIsADomainName,
+  whatIsWebHosting,
+  whatIsDns,
+];
 
 export function getArticle(slug: string): Article | undefined {
   return articles.find((a) => a.slug === slug);
