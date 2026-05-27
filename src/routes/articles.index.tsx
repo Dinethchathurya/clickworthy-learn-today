@@ -11,7 +11,7 @@ const searchSchema = z.object({
     .catch(undefined),
 });
 
-export const Route = createFileRoute("/articles")({
+export const Route = createFileRoute("/articles/")({
   validateSearch: searchSchema,
   head: () => ({
     meta: [
