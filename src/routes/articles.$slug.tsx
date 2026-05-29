@@ -1,4 +1,4 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, useRouter } from "@tanstack/react-router";
 import { Calendar, Clock, User, ArrowLeft } from "lucide-react";
 import { SiteShell } from "@/components/layout/SiteShell";
 import { getArticle, getRelated } from "@/data/articles";
@@ -11,7 +11,8 @@ export const Route = createFileRoute("/articles/$slug")({
   loader: ({ params }) => {
     const article = getArticle(params.slug);
     if (!article) throw notFound();
-    return { article };
+    const { content: _content, ...serializableArticle } = article;
+    return { article: serializableArticle };
   },
   head: ({ loaderData, params }) => {
     if (!loaderData) return {};
@@ -79,13 +80,40 @@ export const Route = createFileRoute("/articles/$slug")({
       </div>
     </SiteShell>
   ),
+  errorComponent: ArticleError,
   component: ArticleView,
 });
 
+function ArticleError({ error, reset }: { error: Error; reset: () => void }) {
+  console.error(error);
+  const router = useRouter();
+
+  return (
+    <SiteShell>
+      <div className="mx-auto flex max-w-2xl flex-col items-center px-4 py-32 text-center">
+        <h1 className="text-3xl font-bold">Article couldn't load</h1>
+        <p className="mt-3 text-muted-foreground">
+          Something went wrong while opening this article.
+        </p>
+        <button
+          onClick={() => {
+            router.invalidate();
+            reset();
+          }}
+          className="mt-6 inline-flex h-10 items-center rounded-full bg-[image:var(--gradient-brand)] px-5 text-sm font-medium text-primary-foreground"
+        >
+          Try again
+        </button>
+      </div>
+    </SiteShell>
+  );
+}
+
 function ArticleView() {
-  const { article } = Route.useLoaderData();
+  const { article: articleSummary } = Route.useLoaderData();
+  const article = getArticle(articleSummary.slug) ?? articleSummary;
   const related = getRelated(article.slug, 3);
-  const Content = article.content;
+  const Content = "content" in article ? article.content : () => null;
 
   return (
     <SiteShell>
