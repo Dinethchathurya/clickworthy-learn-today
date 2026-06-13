@@ -22,10 +22,25 @@ export const Route = createFileRoute("/articles/$slug")({
       meta: [
         { title: a.metaTitle },
         { name: "description", content: a.metaDescription },
+        ...(a.keywords?.length
+          ? [{ name: "keywords", content: a.keywords.join(", ") }]
+          : []),
         { property: "og:type", content: "article" },
-        { property: "og:title", content: a.metaTitle },
-        { property: "og:description", content: a.metaDescription },
+        { property: "og:title", content: a.openGraphTitle ?? a.metaTitle },
+        {
+          property: "og:description",
+          content: a.openGraphDescription ?? a.metaDescription,
+        },
         { property: "og:url", content: url },
+        ...(a.featuredImage
+          ? [
+              { property: "og:image", content: a.featuredImage.src },
+              { property: "og:image:alt", content: a.featuredImage.alt },
+              { name: "twitter:card", content: "summary_large_image" },
+              { name: "twitter:image", content: a.featuredImage.src },
+              { name: "twitter:image:alt", content: a.featuredImage.alt },
+            ]
+          : []),
         { name: "article:published_time", content: a.publishedDate },
         { name: "article:author", content: a.author },
         { name: "article:section", content: a.category },
@@ -39,6 +54,7 @@ export const Route = createFileRoute("/articles/$slug")({
             "@type": "Article",
             headline: a.title,
             description: a.metaDescription,
+            ...(a.featuredImage ? { image: a.featuredImage.src } : {}),
             datePublished: a.publishedDate,
             author: { "@type": "Organization", name: a.author },
             publisher: {
@@ -145,6 +161,22 @@ function ArticleView() {
             </span>
           </div>
         </header>
+
+        {article.featuredImage && (
+          <figure className="mt-10 overflow-hidden rounded-2xl border border-border bg-secondary/40">
+            <img
+              src={article.featuredImage.src}
+              alt={article.featuredImage.alt}
+              title={article.featuredImage.title}
+              width={article.featuredImage.width}
+              height={article.featuredImage.height}
+              className="aspect-video w-full object-cover"
+            />
+            <figcaption className="px-5 py-3 text-sm text-muted-foreground">
+              {article.featuredImage.caption}
+            </figcaption>
+          </figure>
+        )}
 
         <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_280px]">
           <div className="min-w-0">
