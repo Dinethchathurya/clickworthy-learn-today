@@ -4,6 +4,7 @@ import { whatIsAWebsite } from "./articles/what-is-a-website";
 import { whatIsADomainName } from "./articles/what-is-a-domain-name";
 import { whatIsWebHosting } from "./articles/what-is-web-hosting";
 import { whatIsDns } from "./articles/what-is-dns";
+import { whatIsAnIpAddress } from "./articles/what-is-an-ip-address";
 
 export type Category = "Tech Basics" | "AI Tools" | "Productivity" | "Future Tech";
 
@@ -17,6 +18,15 @@ export interface TocItem {
   label: string;
 }
 
+export interface FeaturedImage {
+  src: string;
+  alt: string;
+  title: string;
+  caption: string;
+  width: number;
+  height: number;
+}
+
 export interface Article {
   slug: string;
   title: string;
@@ -28,6 +38,10 @@ export interface Article {
   readingTime: string;
   metaTitle: string;
   metaDescription: string;
+  keywords?: string[];
+  openGraphTitle?: string;
+  openGraphDescription?: string;
+  featuredImage?: FeaturedImage;
   toc: TocItem[];
   faq: FAQItem[];
   relatedSlugs?: string[];
@@ -40,6 +54,7 @@ export const articles: Article[] = [
   whatIsADomainName,
   whatIsWebHosting,
   whatIsDns,
+  whatIsAnIpAddress,
 ];
 
 export function getArticle(slug: string): Article | undefined {
