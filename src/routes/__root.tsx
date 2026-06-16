@@ -119,6 +119,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
             "Beginner-friendly guides to technology, AI tools, productivity and future tech.",
         }),
       },
+      {
+        async: true,
+        src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2143762553601591",
+        crossOrigin: "anonymous",
+      },
     ],
   }),
   shellComponent: RootShell,
