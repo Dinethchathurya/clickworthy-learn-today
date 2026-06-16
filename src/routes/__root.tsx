@@ -79,6 +79,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "Beginner-friendly guides to technology, AI tools, productivity and the future of tech — all explained in plain English.",
       },
       { name: "author", content: "ClickWorthy" },
+      { name: "google-adsense-account", content: "ca-pub-2143762553601591" },
       { name: "theme-color", content: "#6d28d9" },
       { property: "og:site_name", content: "ClickWorthy" },
       { property: "og:type", content: "website" },
