@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, BookOpen, Mail, Sparkles } from "lucide-react";
+import { ArrowRight, BookOpen, Sparkles } from "lucide-react";
 import { SiteShell } from "@/components/layout/SiteShell";
 import { ArticleCard } from "@/components/ArticleCard";
 import { articles, CATEGORIES } from "@/data/articles";
@@ -127,42 +127,6 @@ function Home() {
         </div>
       </section>
 
-      {/* Newsletter */}
-      <section className="mx-auto max-w-6xl px-4 pb-8">
-        <div className="overflow-hidden rounded-3xl border border-border bg-[image:var(--gradient-brand)] p-10 text-primary-foreground md:p-14">
-          <div className="grid items-center gap-8 md:grid-cols-2">
-            <div>
-              <div className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-medium backdrop-blur">
-                <Mail className="h-3.5 w-3.5" /> Newsletter
-              </div>
-              <h2 className="mt-4 text-3xl font-bold md:text-4xl">
-                Get one clear tech guide each week.
-              </h2>
-              <p className="mt-3 max-w-md text-primary-foreground/85">
-                Join curious readers learning AI, productivity and the future of tech — no
-                spam, unsubscribe any time.
-              </p>
-            </div>
-            <form
-              className="flex w-full flex-col gap-3 sm:flex-row"
-              onSubmit={(e) => e.preventDefault()}
-            >
-              <input
-                type="email"
-                required
-                placeholder="you@example.com"
-                className="h-12 w-full rounded-full border-0 bg-white/95 px-5 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-white"
-              />
-              <button
-                type="submit"
-                className="inline-flex h-12 items-center justify-center whitespace-nowrap rounded-full bg-foreground px-6 text-sm font-medium text-background transition-opacity hover:opacity-90"
-              >
-                Subscribe
-              </button>
-            </form>
-          </div>
-        </div>
-      </section>
     </SiteShell>
   );
 }
