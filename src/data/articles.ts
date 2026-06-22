@@ -58,6 +58,7 @@ export const articles: Article[] = [
   whatIsDns,
   whatIsAnIpAddress,
   whatIsABrowser,
+  whatIsCloudComputing,
 ];
 
 export function getArticle(slug: string): Article | undefined {
