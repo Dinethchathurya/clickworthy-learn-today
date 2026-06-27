@@ -7,6 +7,7 @@ import { whatIsDns } from "./articles/what-is-dns";
 import { whatIsAnIpAddress } from "./articles/what-is-an-ip-address";
 import { whatIsABrowser } from "./articles/what-is-a-browser";
 import { whatIsCloudComputing } from "./articles/what-is-cloud-computing";
+import { whatIsAServer } from "./articles/what-is-a-server";
 
 export type Category = "Tech Basics" | "AI Tools" | "Productivity" | "Future Tech";
 
@@ -59,6 +60,7 @@ export const articles: Article[] = [
   whatIsAnIpAddress,
   whatIsABrowser,
   whatIsCloudComputing,
+  whatIsAServer,
 ];
 
 export function getArticle(slug: string): Article | undefined {
